@@ -13,7 +13,7 @@ SUBDOMAIN_PREFIX = os.getenv("SUBDOMAIN_PREFIX", "hao").strip() or "hao"
 TTL = int(os.getenv("TTL", "120").strip() or "120")
 PROXIED = os.getenv("PROXIED", "false").strip().lower() == "true"
 RECORDS_PER_DOMAIN = int(os.getenv("RECORDS_PER_DOMAIN", "4").strip() or "4")
-IP_URL = os.getenv("https://565a.bou.qzz.io/ip.txt").strip()
+IP_URL = os.getenv("IP_URL").strip()
 
 # CF_ACCOUNTS JSON 解析
 CF_ACCOUNTS_JSON = os.getenv("CF_ACCOUNTS")
