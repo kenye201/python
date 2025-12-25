@@ -2,11 +2,9 @@ name: Update Cloudflare DNS
 
 on:
   schedule:
-    # 每天北京时间 8:00 和 20:00 执行（UTC 时间减 8 小时）
-    - cron: '0 0,12 * * *'
-  workflow_dispatch:  # 支持手动触发
+    - cron: '0 0,12 * * *'  # UTC 时间 0:00 和 12:00（北京时间 8:00 和 20:00）
+  workflow_dispatch:
 
-# 防止同一时间多次运行（比锁文件更优雅）
 concurrency:
   group: update-dns
   cancel-in-progress: false
@@ -31,7 +29,6 @@ jobs:
 
       - name: Run DNS update script
         env:
-          # 从 Repository Secrets 读取
           SUBDOMAIN_PREFIX: ${{ secrets.SUBDOMAIN_PREFIX }}
           TTL: ${{ secrets.TTL }}
           PROXIED: ${{ secrets.PROXIED }}
@@ -39,4 +36,4 @@ jobs:
           IP_URL: ${{ secrets.IP_URL }}
           CF_ACCOUNTS: ${{ secrets.CF_ACCOUNTS }}
         run: |
-          python python/py/test.py
+          python py/test.py    # ← 这里改成 py/test.py 就对了！
